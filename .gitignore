@@ -61,6 +61,8 @@ Thumbs.db
 [Bb]in
 [Oo]bj
 [Tt]est[Rr]esults
+.vscode/
+.vs/
 *.suo
 *.user
 *.[Cc]ache
