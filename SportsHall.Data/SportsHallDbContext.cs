@@ -11,14 +11,18 @@
             
         }
 
-        public SportsHallDbContext(DbContextOptions options)
+        public SportsHallDbContext(DbContextOptions<SportsHallDbContext> options)
             :base(options) 
         {
             
         }
 
-        public virtual DbSet<Sport> Sports { get; set; } = null!;
-        public virtual DbSet<Coach> Coaches { get; set; } = null!;
+        public DbSet<Sport> Sports { get; set; } 
+        public DbSet<Coach> Coaches { get; set; } 
+        public DbSet<SportCoach> SportsCoaches { get; set; } 
+        public DbSet<Training> Trainings { get; set; } 
+        public DbSet<User> Users { get; set; } 
+        public DbSet<Reservation> Reservations { get; set; } 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
