@@ -18,9 +18,33 @@
 
             public const int PhoneMaxLength = 10;
 
-            public const string EmailRegex = "^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$";
+            public const string EmailValidation = "^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$";
 
             public const int ExpirienceMaxLength = 300;
+        }
+
+        public static class Training
+        {
+            public const string DateFormat = "yyyy-MM-dd hh:mm";
+
+            public const int LocationMaxLength = 150;
+
+        }
+
+        public static class User
+        {
+            public const int FirstNameMaxLength = 30;
+            public const int LastNameMaxLength = 50;
+
+            public const string EmailValidation = "^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$";
+
+            public const int PhoneMaxLength = 10;
+
+        }
+
+        public static class Reservation
+        {
+            public const string DateFormat = "yyyy-MM-dd hh:mm";
         }
     }
 }
