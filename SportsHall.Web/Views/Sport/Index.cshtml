@@ -1,0 +1,14 @@
+﻿@model IEnumerable<SportsHall.Web.ViewModels.SportsViewModel>
+
+<div class="row">
+    @foreach (var sport in Model)
+    {
+        <div class="card" style="width: 18rem;">
+            <img src="@sport.Image" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@sport.Name</h5>
+                <a href="#" class="btn btn-primary">Show more</a>
+            </div>
+        </div>
+    }
+</div>
