@@ -30,5 +30,16 @@ namespace SportsHall.Web.Controllers
             return View(sports);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var sports = await this.context.Sports
+                .Where(s => s.Id == id)
+                .AsNoTracking()
+                .ToListAsync();
+
+            return Json(sports);
+        }
+
     }
 }
