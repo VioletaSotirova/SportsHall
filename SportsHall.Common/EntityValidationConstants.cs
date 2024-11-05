@@ -31,7 +31,7 @@
 
         }
 
-        public static class User
+        public static class ApplicationUser
         {
             public const int FirstNameMaxLength = 30;
             public const int LastNameMaxLength = 50;
