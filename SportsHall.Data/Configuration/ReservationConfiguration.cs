@@ -15,7 +15,7 @@ namespace SportsHall.Data.Configuration
                   .HasForeignKey(r => r.TrainingId)
                   .OnDelete(DeleteBehavior.Cascade); 
 
-            builder.HasOne(r => r.User)
+            builder.HasOne(r => r.ApplicationUser)
                   .WithMany(u => u.Reservations)
                   .HasForeignKey(r => r.UserId)
                   .OnDelete(DeleteBehavior.Cascade);  
