@@ -1,7 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SportsHall.Data;
-using SportsHall.Web.Data;
+using SportsHall.Data.Models;
+using Microsoft.AspNetCore.Razor.Runtime;
 
 namespace SportsHall.Web
 {
@@ -14,18 +15,21 @@ namespace SportsHall.Web
             // Add services to the container.
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
-            
-            builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
+
 
             builder.Services.AddDbContext<SportsHallDbContext>(options =>
                 options.UseSqlServer(connectionString));
 
-            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
-           
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(options => options.SignIn.RequireConfirmedAccount = true)
+                //.AddSignInManager<UserManager<ApplicationUser>>()
+               //.AddUserManager<UserManager<ApplicationUser>>()
+                // .AddUserStore<ApplicationUser>()
+                .AddEntityFrameworkStores<SportsHallDbContext>()
+                .AddDefaultTokenProviders();
+
+            builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+            builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -47,6 +51,7 @@ namespace SportsHall.Web
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
