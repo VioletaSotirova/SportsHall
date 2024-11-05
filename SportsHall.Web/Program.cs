@@ -19,8 +19,7 @@ namespace SportsHall.Web
 
             builder.Services.AddDbContext<SportsHallDbContext>(options =>
                 options.UseSqlServer(connectionString));
-
-
+ 
             builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(cfg =>
             {
                 ConfigureIdentity(builder, cfg);
