@@ -9,6 +9,10 @@
 
             public const int DescriptionMinLength = 7;
             public const int DescriptionMaxLength = 300;
+
+            public const string NoImageUrl = "/images/defaultSportImage.jpg";
+            public const int ImageMinLength = 8;
+            public const int ImageMaxLength = 2083;
         }
 
         public static class Coach
