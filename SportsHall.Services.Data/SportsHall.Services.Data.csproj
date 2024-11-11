@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\SportsHall.Data.Models\SportsHall.Data.Models.csproj" />
+    <ProjectReference Include="..\SportsHall.Data\SportsHall.Data.csproj" />
+    <ProjectReference Include="..\SportsHall.Web.ViewModels\SportsHall.Web.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>
