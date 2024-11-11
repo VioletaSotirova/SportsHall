@@ -23,7 +23,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SportsHall.Common\SportsHall.Common.csproj" />
+    <ProjectReference Include="..\SportsHall.Data.Models\SportsHall.Data.Models.csproj" />
     <ProjectReference Include="..\SportsHall.Data\SportsHall.Data.csproj" />
+    <ProjectReference Include="..\SportsHall.Services.Data\SportsHall.Services.Data.csproj" />
+    <ProjectReference Include="..\SportsHall.Services.Mapping\SportsHall.Services.Mapping.csproj" />
     <ProjectReference Include="..\SportsHall.Web.ViewModels\SportsHall.Web.ViewModels.csproj" />
   </ItemGroup>
 

@@ -3,19 +3,27 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35312.102
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsHall.Web", "SportsHall.Web\SportsHall.Web.csproj", "{097521B6-C36D-4D11-90A3-7C053CC61680}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsHall.Web", "SportsHall.Web\SportsHall.Web.csproj", "{097521B6-C36D-4D11-90A3-7C053CC61680}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsHall.Web.ViewModels", "SportsHall.Web.ViewModels\SportsHall.Web.ViewModels.csproj", "{44F67999-95BA-44A6-B37D-214B570E576D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsHall.Web.ViewModels", "SportsHall.Web.ViewModels\SportsHall.Web.ViewModels.csproj", "{44F67999-95BA-44A6-B37D-214B570E576D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsHall.Common", "SportsHall.Common\SportsHall.Common.csproj", "{05AD4358-B0AE-4452-B718-4A136820B55E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsHall.Common", "SportsHall.Common\SportsHall.Common.csproj", "{05AD4358-B0AE-4452-B718-4A136820B55E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsHall.Data.Models", "SportsHall.Data.Models\SportsHall.Data.Models.csproj", "{02D38870-9D22-44DE-B6F8-10D2CCCBC534}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsHall.Data.Models", "SportsHall.Data.Models\SportsHall.Data.Models.csproj", "{02D38870-9D22-44DE-B6F8-10D2CCCBC534}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{F9E7A81C-4E79-491E-B4BE-217820B74D7A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{B979311F-7863-4BF0-B496-1EF4ED6DA599}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsHall.Data", "SportsHall.Data\SportsHall.Data.csproj", "{E5EE0593-C530-4910-BDA3-81E607D9001C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsHall.Data", "SportsHall.Data\SportsHall.Data.csproj", "{E5EE0593-C530-4910-BDA3-81E607D9001C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{2526B468-1A06-4157-A60D-8DDDE650A5F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsHall.Services.Data", "SportsHall.Services.Data\SportsHall.Services.Data.csproj", "{D3F45313-BEAF-430D-BC18-B5F0E65FA312}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsHall.Services.Mapping", "SportsHall.Services.Mapping\SportsHall.Services.Mapping.csproj", "{C14A8674-93D2-4595-A25D-A5FEC7A4C8A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsHall.Web.Infrastructure", "SportsHall.Web.Infrastructure\SportsHall.Web.Infrastructure.csproj", "{414BCCA5-936E-4E30-B937-ED328416D6E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,6 +51,18 @@ Global
 		{E5EE0593-C530-4910-BDA3-81E607D9001C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E5EE0593-C530-4910-BDA3-81E607D9001C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E5EE0593-C530-4910-BDA3-81E607D9001C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3F45313-BEAF-430D-BC18-B5F0E65FA312}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3F45313-BEAF-430D-BC18-B5F0E65FA312}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3F45313-BEAF-430D-BC18-B5F0E65FA312}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3F45313-BEAF-430D-BC18-B5F0E65FA312}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C14A8674-93D2-4595-A25D-A5FEC7A4C8A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C14A8674-93D2-4595-A25D-A5FEC7A4C8A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C14A8674-93D2-4595-A25D-A5FEC7A4C8A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C14A8674-93D2-4595-A25D-A5FEC7A4C8A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{414BCCA5-936E-4E30-B937-ED328416D6E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{414BCCA5-936E-4E30-B937-ED328416D6E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{414BCCA5-936E-4E30-B937-ED328416D6E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{414BCCA5-936E-4E30-B937-ED328416D6E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,6 +72,9 @@ Global
 		{44F67999-95BA-44A6-B37D-214B570E576D} = {F9E7A81C-4E79-491E-B4BE-217820B74D7A}
 		{02D38870-9D22-44DE-B6F8-10D2CCCBC534} = {B979311F-7863-4BF0-B496-1EF4ED6DA599}
 		{E5EE0593-C530-4910-BDA3-81E607D9001C} = {B979311F-7863-4BF0-B496-1EF4ED6DA599}
+		{D3F45313-BEAF-430D-BC18-B5F0E65FA312} = {2526B468-1A06-4157-A60D-8DDDE650A5F8}
+		{C14A8674-93D2-4595-A25D-A5FEC7A4C8A7} = {2526B468-1A06-4157-A60D-8DDDE650A5F8}
+		{414BCCA5-936E-4E30-B937-ED328416D6E8} = {F9E7A81C-4E79-491E-B4BE-217820B74D7A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8D092A02-8D7D-460F-BC9C-375CAB00AE4E}
