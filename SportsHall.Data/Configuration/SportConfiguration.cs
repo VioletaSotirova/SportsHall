@@ -24,6 +24,11 @@ namespace SportsHall.Data.Configuration
             builder.Property(s => s.MaxParticipants)
             .IsRequired();
 
+            builder.Property(s => s.ImageUrl)
+                .IsRequired(false)
+                .HasMaxLength(ImageMaxLength)
+                .HasDefaultValue(NoImageUrl);
+
             builder.HasData(this.SeedSports());
         }
     
