@@ -2,7 +2,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using SportsHall.Data;
 using SportsHall.Data.Models;
-using Microsoft.AspNetCore.Razor.Runtime;
+using SportsHall.Services.Mapping;
+using SportsHall.Web.ViewModels;
+using SportsHall.Data.Repository.Interfaces;
+using SportsHall.Data.Repository;
+using SportsHall.Services.Data.Interfaces;
+using SportsHall.Services.Data;
 
 namespace SportsHall.Web
 {
@@ -11,6 +16,8 @@ namespace SportsHall.Web
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            AutoMapperConfig.RegisterMappings(typeof(ErrorViewModel).Assembly);
 
             // Add services to the container.
 
@@ -33,6 +40,14 @@ namespace SportsHall.Web
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.AddRazorPages();
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddScoped<IRepository<Sport, int>, BaseRepository<Sport, int>>();
+            builder.Services.AddScoped<IRepository<Coach, int>, BaseRepository<Coach, int>>();
+            builder.Services.AddScoped<IRepository<Reservation, int>, BaseRepository<Reservation, int>>();
+            builder.Services.AddScoped<IRepository<Training, int>, BaseRepository<Training, int>>();
+            builder.Services.AddScoped<IRepository<SportCoach,object>, BaseRepository<SportCoach, object>>();
+
+            builder.Services.AddScoped<ISportService, SportService>();
 
             var app = builder.Build();
 
