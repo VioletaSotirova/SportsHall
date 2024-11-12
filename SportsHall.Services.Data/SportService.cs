@@ -24,5 +24,16 @@ namespace SportsHall.Services.Data
 
             return sports;
         }
+
+        public async Task<SportDetailsViewModel> DetailsAsync(int id)
+        {
+            var sport = await this.sportRepository
+                 .GetAllAttached()
+                 .Where(s => s.Id == id)
+                 .To<SportDetailsViewModel>()
+                 .FirstOrDefaultAsync();
+
+            return sport;
+        }  
     }
 }

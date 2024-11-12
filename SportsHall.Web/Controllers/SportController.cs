@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SportsHall.Data;
 using SportsHall.Web.ViewModels;
 using SportsHall.Services.Data.Interfaces;
+using SportsHall.Services.Mapping;
 
 namespace SportsHall.Web.Controllers
 {
@@ -29,12 +30,13 @@ namespace SportsHall.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
-            var sports = await this.context.Sports
-                .Where(s => s.Id == id)
-                .AsNoTracking()
-                .ToListAsync();
+            var sport = await this.sportService.DetailsAsync(id);
+            if (sport == null)
+            {
+                return NotFound();
+            }
 
-            return Json(sports);
+            return View(sport);
         }
 
     }

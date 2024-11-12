@@ -3,11 +3,11 @@
 <div class="row">
     @foreach (var sport in Model)
     {
-        <div class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem; margin: 1rem;">
             <img src="@sport.ImageUrl" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">@sport.Name</h5>
-                <a href="#" class="btn btn-primary">Show more</a>
+                <a asp-controller="Sport" asp-action="Details" asp-route-id="@sport.Id" class="btn btn-primary">Learn more</a>
             </div>
         </div>
     }
