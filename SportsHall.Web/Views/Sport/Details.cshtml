@@ -6,5 +6,6 @@
         <h5 class="card-title text-center">@Model.Name</h5>
         <p class="card-text">@Model.Description</p>
         <a href="#" class="btn btn-primary float-end">Sign Up</a>
+        <a asp-controller="Sport" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
     </div>
 </div>

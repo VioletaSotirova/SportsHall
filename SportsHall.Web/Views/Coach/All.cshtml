@@ -1,0 +1,19 @@
+﻿@model IEnumerable<SportsHall.Web.ViewModels.CoachesViewModel>
+
+<div class="row">
+    @foreach (var coach in Model)
+    {
+        <div class="card" style="width: 18rem; margin: 1rem;">
+            <img src="@coach.ImageUrl" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@coach.FirstName @coach.LastName</h5>
+                <h5 class="card-title">
+                    @(coach.Expirience.Length > 30 ? coach.Expirience.Substring(0, 30) + "..." : coach.Expirience)
+                </h5>
+                <div class="d-flex justify-content-end">
+                    <a asp-controller="Coach" asp-action="Details" asp-route-id="@coach.Id" class="btn btn-primary">Show more</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
