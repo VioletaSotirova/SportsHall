@@ -48,6 +48,7 @@ namespace SportsHall.Web
             builder.Services.AddScoped<IRepository<SportCoach,object>, BaseRepository<SportCoach, object>>();
 
             builder.Services.AddScoped<ISportService, SportService>();
+            builder.Services.AddScoped<ICoachService, CoachService>();
 
             var app = builder.Build();
 
