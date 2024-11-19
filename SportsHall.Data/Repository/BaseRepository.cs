@@ -103,5 +103,6 @@ namespace SportsHall.Data.Repository
                 return false;
             }
         }
+
     }
 }
