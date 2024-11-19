@@ -251,7 +251,9 @@ namespace SportsHall.Data.Migrations
                         .HasColumnType("nvarchar(20)");
 
                     b.Property<string>("ImageUrl")
-                        .HasColumnType("nvarchar(max)");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(max)")
+                        .HasDefaultValue("/images/NoPhoto.jpg");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -272,8 +274,9 @@ namespace SportsHall.Data.Migrations
                         {
                             Id = 1,
                             Email = "vanya89@gmail.com",
-                            Expirience = "Vanya is a passionate fitness professional with over five years of experience in group fitness instruction, specializing in Zumba and Spinning. With a vibrant personality and an infectious enthusiasm for fitness, Jessica creates an uplifting and energetic environment in her classes.",
+                            Expirience = "Vanya is a passionate fitness professional with over five years of experience in group fitness instruction, specializing in Zumba and Spinning. With a vibrant personality and an infectious enthusiasm for fitness, Vanya creates an uplifting and energetic environment in her classes.",
                             FirstName = "Vanya",
+                            ImageUrl = "/images/Vanya.jpg",
                             LastName = "Ivanova",
                             Phone = "0885222111"
                         },
@@ -283,6 +286,7 @@ namespace SportsHall.Data.Migrations
                             Email = "ivoPetkov@gmail.com",
                             Expirience = "Ivaylo is a dedicated CrossFit coach with over six years of experience in the fitness industry. His passion for high-intensity training and commitment to functional fitness has transformed the lives of countless athletes and fitness enthusiasts.",
                             FirstName = "Ivaylo",
+                            ImageUrl = "/images/Ivaylo.jpg",
                             LastName = "Petkov",
                             Phone = "0883212121"
                         },
@@ -292,6 +296,7 @@ namespace SportsHall.Data.Migrations
                             Email = "Sonya@gmail.com",
                             Expirience = "Sonya  is a highly experienced yoga instructor with over ten years of dedicated practice and teaching experience. Her journey with yoga began as a way to find inner balance and mindfulness, which she now shares with her students, guiding them toward a holistic approach to wellness.",
                             FirstName = "Sonya",
+                            ImageUrl = "/images/Sonya.jpg",
                             LastName = "Stamatova",
                             Phone = "0883212122"
                         });
