@@ -23,6 +23,7 @@
             public const int PhoneMaxLength = 10;
 
             public const string EmailValidation = "^([\\w\\.\\-]+)@([\\w\\-]+)((\\.(\\w){2,3})+)$";
+            public const string NoPhoto = "/images/NoPhoto.jpg";
 
             public const int ExpirienceMaxLength = 300;
         }
