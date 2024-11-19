@@ -27,6 +27,10 @@ namespace SportsHall.Data.Configuration
                .IsRequired()
                .HasMaxLength(ExpirienceMaxLength);
 
+            builder.Property(s => s.ImageUrl)
+                .IsRequired(false)
+                .HasDefaultValue(NoPhoto);
+
             builder.HasData(SeedCoaches());
         }
 
@@ -41,7 +45,8 @@ namespace SportsHall.Data.Configuration
                     LastName = "Ivanova",
                     Email = "vanya89@gmail.com",
                     Phone = "0885222111",
-                    Expirience = "Vanya is a passionate fitness professional with over five years of experience in group fitness instruction, specializing in Zumba and Spinning. With a vibrant personality and an infectious enthusiasm for fitness, Jessica creates an uplifting and energetic environment in her classes."
+                    ImageUrl = "/images/Vanya.jpg",
+                    Expirience = "Vanya is a passionate fitness professional with over five years of experience in group fitness instruction, specializing in Zumba and Spinning. With a vibrant personality and an infectious enthusiasm for fitness, Vanya creates an uplifting and energetic environment in her classes."
                 },
 
                 new Coach()
@@ -51,6 +56,7 @@ namespace SportsHall.Data.Configuration
                     LastName = "Petkov",
                     Email = "ivoPetkov@gmail.com",
                     Phone = "0883212121",
+                    ImageUrl = "/images/Ivaylo.jpg",
                     Expirience = "Ivaylo is a dedicated CrossFit coach with over six years of experience in the fitness industry. His passion for high-intensity training and commitment to functional fitness has transformed the lives of countless athletes and fitness enthusiasts."
                 },
 
@@ -61,6 +67,7 @@ namespace SportsHall.Data.Configuration
                     LastName = "Stamatova",
                     Email = "Sonya@gmail.com",
                     Phone = "0883212122",
+                    ImageUrl = "/images/Sonya.jpg",
                     Expirience = "Sonya  is a highly experienced yoga instructor with over ten years of dedicated practice and teaching experience. Her journey with yoga began as a way to find inner balance and mindfulness, which she now shares with her students, guiding them toward a holistic approach to wellness."
                 }
             };
