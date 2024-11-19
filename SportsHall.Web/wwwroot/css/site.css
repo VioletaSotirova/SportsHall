@@ -30,3 +30,15 @@ body {
     max-width: 600px;
     margin: 0 auto;
 }
+
+.dropdown-menu {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
