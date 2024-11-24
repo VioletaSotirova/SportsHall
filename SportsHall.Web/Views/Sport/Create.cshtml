@@ -1,0 +1,170 @@
+﻿@model SportsHall.Web.ViewModels.SportEditViewModel
+
+<div class="container">
+    <h2>Create a New Sport</h2>
+    <form asp-action="Create" method="post">
+
+        <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="MaxParticipants"></label>
+            <input asp-for="MaxParticipants" class="form-control" type="number" />
+            <span asp-validation-for="MaxParticipants" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="ImageUrl"></label>
+            <input asp-for="ImageUrl" class="form-control" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="coachesDropdown">Coaches</label>
+            <div class="form-control" id="selectedCoachesDisplay">
+                @string.Join(", ", Model.SelectedCoachesNames)
+            </div>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="coachesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Choose Coaches
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="coachesDropdown">
+                    @if (Model.AvailableCoaches != null && Model.AvailableCoaches.Any())
+                    {
+                        @foreach (var coach in Model.AvailableCoaches)
+                        {
+                            <li class="dropdown-item">
+                                <input type="checkbox"
+                                       class="form-check-input"
+                                       id="coach-@coach.Value"
+                                       name="SelectedCoaches"
+                                       value="@coach.Value"
+                                @(Model.SelectedCoaches.Contains(int.Parse(coach.Value)) ? "checked" : "") />
+                                <label class="form-check-label" for="coach-@coach.Value">@coach.Text</label>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <p>No coaches available.</p>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <!-- Form buttons -->
+        <div class="form-group mt-4 d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+</div>
+
+@section Scripts {
+    <script>
+        function updateSelectedCoachesDisplay() {
+            var selectedCoachesNames = [];
+            $("input[name='SelectedCoaches']:checked").each(function () {
+                selectedCoachesNames.push($(this).next("label").text());
+            });
+            $("#selectedCoachesDisplay").text(selectedCoachesNames.join(", "));
+        }
+
+        $(document).ready(function () {
+            updateSelectedCoachesDisplay();
+
+            $("input[name='SelectedCoaches']").on("change", function () {
+                updateSelectedCoachesDisplay();
+            });
+        });
+    </script>
+}
+
+
+
+
+
+
+
+
+@*
+
+        <div class="form-group">
+            <label asp-for="Name"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="Description"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="MaxParticipants"></label>
+            <input asp-for="MaxParticipants" type="number" class="form-control" />
+            <span asp-validation-for="MaxParticipants" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label asp-for="ImageUrl"></label>
+            <input asp-for="ImageUrl" class="form-control" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="form-group mt-3">
+            <label for="coachesDropdown">Coaches</label>
+            <div class="form-control" id="selectedCoachesDisplay">
+                @string.Join(", ", Model.SelectedCoachesNames)
+            </div>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="coachesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                    Choose Coaches
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="coachesDropdown">
+                    @if (Model.AvailableCoaches != null && Model.AvailableCoaches.Any())
+                    {
+                        @foreach (var coach in Model.AvailableCoaches)
+                        {
+                            <li class="dropdown-item">
+                                <input type="checkbox"
+                                       class="form-check-input"
+                                       id="coach-@coach.Value"
+                                       name="SelectedCoaches"
+                                       value="@coach.Value"
+                                @(Model.SelectedCoaches.Contains(int.Parse(coach.Value)) ? "checked" : "") />
+                                <label class="form-check-label" for="coach-@coach.Value">@coach.Text</label>
+                            </li>
+                        }
+                    }
+                    else
+                    {
+                        <p>No coaches available.</p>
+                    }
+                </ul>
+            </div>
+        </div>
+
+        <div class="form-group mt-4 d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary mt-4">Create Sport</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+*@
+

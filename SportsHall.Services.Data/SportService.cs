@@ -88,31 +88,38 @@ namespace SportsHall.Services.Data
                 }
 
                 await this.sportRepository.UpdateAsync(sport);
-            }
+            }  
+        }
 
-            /*var sport = await GetByIdWithCoachesAsync(model.Id);
+        public async Task DeleteAsync (int id)
+        {
+            var sport = await sportRepository.GetByIdAsync(id);
 
             if (sport != null)
             {
-                sport.Name = model.Name;
-                sport.Description = model.Description;
-                sport.MaxParticipants = model.MaxParticipants;
-                sport.ImageUrl = model.ImageUrl;
 
-                coachService.GetByIdWithSportsAsync(model.Id);
-
-                //sport.SportsCoaches.Clear();
-                //foreach (var coachId in model.SelectedCoaches)
-                //{
-                //    sport.SportsCoaches.Add(new SportCoach
-                //    {
-                //        SportId = sport.Id,
-                //        CoachId = coachId
-                //    });
-                //}
+                await sportRepository.DeleteAsync(sport);
+     
             }
-            await sportRepository.UpdateAsync(sport);*/
+
         }
+
+        public async Task<Sport> CreateAsync(SportEditViewModel model)
+        {
+            var sport = new Sport
+            {
+                Name = model.Name,
+                Description = model.Description,
+                MaxParticipants = model.MaxParticipants,
+                ImageUrl = model.ImageUrl,
+                
+            };
+
+            await sportRepository.AddAsync(sport);
+            return sport;
+        }
+
+
 
         public async Task<Sport> GetByIdWithCoachesAsync(int id)
         {

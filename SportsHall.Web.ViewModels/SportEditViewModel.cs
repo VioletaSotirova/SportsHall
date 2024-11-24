@@ -18,8 +18,7 @@ namespace SportsHall.Web.ViewModels
         [Range(1, int.MaxValue, ErrorMessage = "Max participants must be greater than 0.")]
         public int MaxParticipants { get; set; }
 
-        [Required]
-        public string ImageUrl { get; set; }
+        public string? ImageUrl { get; set; }
 
         public IList<SelectListItem>? AvailableCoaches { get; set; } 
 

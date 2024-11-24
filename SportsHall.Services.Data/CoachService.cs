@@ -73,6 +73,7 @@ namespace SportsHall.Services.Data
                 .Include(c => c.SportsCoaches)
                 .ThenInclude(sc => sc.Sport)
                 .FirstOrDefaultAsync();
+
             return coach;
         }
 

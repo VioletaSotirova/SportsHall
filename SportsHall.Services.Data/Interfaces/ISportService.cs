@@ -11,6 +11,7 @@ namespace SportsHall.Services.Data.Interfaces
         Task UpdateSportAsync(SportEditViewModel model);
         Task<Sport> GetByIdWithCoachesAsync(int id);
         Task<Sport> GetByIdAsync(int id);
-
+        Task DeleteAsync(int id);
+        Task<Sport> CreateAsync(SportEditViewModel model);
     }
 }
