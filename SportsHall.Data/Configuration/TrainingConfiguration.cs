@@ -15,12 +15,12 @@ namespace SportsHall.Data.Configuration
             builder.HasOne(t => t.Sport)
                 .WithMany(s => s.Trainings)
                 .HasForeignKey(t => t.SportId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(t => t.Coach)
                 .WithMany(c => c.Trainings)
                 .HasForeignKey(t => t.CoachId)
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Property(t => t.Location)
                 .IsRequired()
