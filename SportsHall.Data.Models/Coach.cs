@@ -9,7 +9,6 @@
         public string Phone { get; set; } = null!;
         public string Expirience { get; set; } = null!;
         public string? ImageUrl { get; set; }
-        public IEnumerable<SportCoach> SportsCoaches { get; set; } = new List<SportCoach>();
         public IEnumerable<Training> Trainings { get; set; } = new List<Training>();
 
     }

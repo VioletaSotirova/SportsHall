@@ -7,7 +7,6 @@
         public string Description { get; set; } = null!;
         public int MaxParticipants { get; set; }
         public string? ImageUrl { get; set; }
-        public List<SportCoach> SportsCoaches { get; set; } = new List<SportCoach>();
         public IEnumerable<Training> Trainings { get; set; } = new List<Training>();
     }
 }

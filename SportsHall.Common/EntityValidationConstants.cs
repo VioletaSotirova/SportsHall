@@ -36,6 +36,12 @@
 
         }
 
+        public static class TrainingStatus
+        {
+            public const int NameMinLength = 2;
+            public const int NameMaxLength = 20;
+        }
+
         public static class ApplicationUser
         {
             public const int FirstNameMaxLength = 30;

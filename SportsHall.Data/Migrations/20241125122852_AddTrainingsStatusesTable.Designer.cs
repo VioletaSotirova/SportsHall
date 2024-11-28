@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SportsHall.Data;
 
@@ -11,9 +12,11 @@ using SportsHall.Data;
 namespace SportsHall.Data.Migrations
 {
     [DbContext(typeof(SportsHallDbContext))]
-    partial class SportsHallDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241125122852_AddTrainingsStatusesTable")]
+    partial class AddTrainingsStatusesTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

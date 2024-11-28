@@ -22,6 +22,11 @@ namespace SportsHall.Data.Configuration
                 .HasForeignKey(t => t.CoachId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+
+            builder.HasOne(t => t.TrainingStatus)
+                .WithMany()
+                .HasForeignKey(t => t.TrainingStatusId);
+
             builder.Property(t => t.Location)
                 .IsRequired()
                 .HasMaxLength(LocationMaxLength);
@@ -35,8 +40,6 @@ namespace SportsHall.Data.Configuration
             builder.Property(t => t.AvailableSpot)
                 .IsRequired();
 
-            builder.Property(t => t.Status)
-                .IsRequired();
             builder.HasData(SeedTrainings());
         }
 
@@ -52,7 +55,8 @@ namespace SportsHall.Data.Configuration
                     Start  = DateTime.ParseExact("2024-10-31 08:30",DateFormat, CultureInfo.InvariantCulture),
                     Location = "Plovdiv, bul.Hristo Botev 4, DynamicFitCenter, Hall 3",
                     Duration = 50,
-                    AvailableSpot = 30
+                    AvailableSpot = 30,
+                    TrainingStatusId = 1,
                 },
 
                  new Training
@@ -63,7 +67,8 @@ namespace SportsHall.Data.Configuration
                     Start  = DateTime.ParseExact("2024-10-31 10:30",DateFormat, CultureInfo.InvariantCulture),
                     Location = "Plovdiv, bul.Hristo Botev 4, DynamicFitCenter, Hall 1",
                     Duration = 30,
-                    AvailableSpot = 20
+                    AvailableSpot = 20,
+                    TrainingStatusId = 1
                 },
 
                   new Training
@@ -74,7 +79,8 @@ namespace SportsHall.Data.Configuration
                     Start  = DateTime.ParseExact("2024-10-31 11:00",DateFormat, CultureInfo.InvariantCulture),
                     Location = "Plovdiv, bul.Hristo Botev 4, DynamicFitCenter, Hall 5",
                     Duration = 50,
-                    AvailableSpot = 5
+                    AvailableSpot = 5,
+                    TrainingStatusId = 1
                 },
 
                     new Training
@@ -85,7 +91,8 @@ namespace SportsHall.Data.Configuration
                     Start  = DateTime.ParseExact("2024-10-31 11:50",DateFormat, CultureInfo.InvariantCulture),
                     Location = "Plovdiv, bul.Hristo Botev 4, DynamicFitCenter, Hall 5",
                     Duration = 45,
-                    AvailableSpot = 14
+                    AvailableSpot = 14,
+                    TrainingStatusId = 1
                 }
             };
             return trainings;
