@@ -8,9 +8,11 @@ namespace SportsHall.Services.Data.Interfaces
     {
         Task<IEnumerable<CoachesViewModel>> GetAllAsync();
         Task<CoachDetailsViewModel> DetailsAsync(int id);
-        Task<List<SelectListItem>> GetAllCoachesAsSelectListAsync();
-        Task<List<string>> GetCoachNamesByIdsAsync(List<int> coachIds);
-        Task<Coach> GetByIdWithSportsAsync(int id);
+        Task<CoachEditViewModel> EditAsync(int id);
         Task<Coach> GetCoachByIdAsync(int id);
+        Task UpdateCoachAsync(CoachEditViewModel model);
+        Task<Coach> CreateAsync(CoachEditViewModel model);
+        Task DeleteAsync(int id);
+        Task<IEnumerable<SelectListItem>> GetCoachesAsSelectItemAsync();
     }
 }

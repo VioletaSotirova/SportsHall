@@ -20,10 +20,5 @@ namespace SportsHall.Web.ViewModels
 
         public string? ImageUrl { get; set; }
 
-        public IList<SelectListItem>? AvailableCoaches { get; set; } 
-
-        public List<int> SelectedCoaches { get; set; } = new List<int>();
-
-        public List<string> SelectedCoachesNames { get; set; } = new List<string>();
     }
 }

@@ -31,41 +31,7 @@
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
 
-            <div class="form-group mt-3">
-                <label for="coachesDropdown">Coaches</label>
-                <div class="form-control" id="selectedCoachesDisplay">
-                    @string.Join(", ", Model.SelectedCoachesNames)
-                </div>
-
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="coachesDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Choose Coaches
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="coachesDropdown">
-                        @if (Model.AvailableCoaches != null && Model.AvailableCoaches.Any())
-                        {
-                            @foreach (var coach in Model.AvailableCoaches)
-                            {
-                                <li class="dropdown-item">
-                                    <input type="checkbox"
-                                           class="form-check-input"
-                                           id="coach-@coach.Value"
-                                           name="SelectedCoaches"
-                                           value="@coach.Value"
-                                    @(Model.SelectedCoaches.Contains(int.Parse(coach.Value)) ? "checked" : "") />
-                                    <label class="form-check-label" for="coach-@coach.Value">@coach.Text</label>
-                                </li>
-                            }
-                        }
-                        else
-                        {
-                            <p>No coaches available.</p>
-                        }
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Form buttons -->
+         
             <div class="form-group mt-4 d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Save Changes</button>
                 <a asp-action="Index" class="btn btn-secondary">Cancel</a>
@@ -74,22 +40,3 @@
     </div>
 </div>
 
-@section Scripts {
-    <script>
-        function updateSelectedCoachesDisplay() {
-            var selectedCoachesNames = [];
-            $("input[name='SelectedCoaches']:checked").each(function () {
-                selectedCoachesNames.push($(this).next("label").text());
-            });
-            $("#selectedCoachesDisplay").text(selectedCoachesNames.join(", "));
-        }
-
-        $(document).ready(function () {
-            updateSelectedCoachesDisplay();
-
-            $("input[name='SelectedCoaches']").on("change", function () {
-                updateSelectedCoachesDisplay();
-            });
-        });
-    </script>
-}

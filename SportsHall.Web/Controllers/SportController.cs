@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SportsHall.Services.Data.Interfaces;
 
-using SportsHall.Data;
 using SportsHall.Web.ViewModels;
-using SportsHall.Data.Models;
-using System.Globalization;
-using System.Runtime.Serialization;
-using static SportsHall.Common.EntityValidationConstants;
+
 
 
 namespace SportsHall.Web.Controllers
@@ -14,13 +10,10 @@ namespace SportsHall.Web.Controllers
     public class SportController : Controller
     {
         private readonly ISportService sportService;
-        private readonly SportsHallDbContext dbContext;
-        private readonly ICoachService coachService;
-        public SportController(SportsHallDbContext dbContext, ISportService sportService, ICoachService coachService)
+
+        public SportController(ISportService sportService)
         {
             this.sportService = sportService;
-            this.dbContext = dbContext;
-            this.coachService = coachService;
         }
 
         [HttpGet]
@@ -62,13 +55,6 @@ namespace SportsHall.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.AvailableCoaches = await coachService.GetAllCoachesAsSelectListAsync();
-
-                if (model.SelectedCoaches != null)
-                {
-                    model.SelectedCoachesNames = await coachService.GetCoachNamesByIdsAsync(model.SelectedCoaches);
-                }
-
                 return View(model);
             }
 
@@ -78,14 +64,12 @@ namespace SportsHall.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            var sport = await sportService.GetByIdWithCoachesAsync(id);
+            var sport = await sportService.GetByIdAsync(id);
 
             if (sport == null)
             {
                 return NotFound(); 
             }
-
-            sport.SportsCoaches.Clear();
             await sportService.DeleteAsync(sport.Id);
 
             return RedirectToAction("Index");
@@ -104,7 +88,6 @@ namespace SportsHall.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                model.AvailableCoaches = await coachService.GetAllCoachesAsSelectListAsync();
                 return this.View(model);
             }
 
@@ -112,7 +95,6 @@ namespace SportsHall.Web.Controllers
 
             return RedirectToAction(nameof(Index));
         }
-
     }
 }
 

@@ -7,18 +7,17 @@ using SportsHall.Services.Mapping;
 using SportsHall.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace SportsHall.Services.Data
 {
     public class SportService : ISportService
     {
         private IRepository<Sport, int> sportRepository;
-        private readonly ICoachService coachService;
 
-        public SportService(IRepository<Sport, int> sportRepository, ICoachService coachService)
+        public SportService(IRepository<Sport, int> sportRepository)
         {
             this.sportRepository = sportRepository;
-            this.coachService = coachService;
         }
         public async Task<IEnumerable<SportsViewModel>> GetAllAsync()
         {
@@ -29,7 +28,6 @@ namespace SportsHall.Services.Data
 
             return sports;
         }
-
         public async Task<SportDetailsViewModel> DetailsAsync(int id)
         {
             var sport = await this.sportRepository
@@ -42,7 +40,7 @@ namespace SportsHall.Services.Data
         }
         public async Task<SportEditViewModel> EditAsync(int id)
         {
-            var sport = await GetByIdWithCoachesAsync(id);
+            var sport = await GetByIdAsync(id);
 
             var model = new SportEditViewModel
             {
@@ -50,17 +48,14 @@ namespace SportsHall.Services.Data
                 Name = sport.Name,
                 Description = sport.Description,
                 MaxParticipants = sport.MaxParticipants,
-                ImageUrl = sport.ImageUrl,
-                SelectedCoaches = sport.SportsCoaches.Select(sc => sc.CoachId).ToList(),
-                AvailableCoaches = await this.coachService.GetAllCoachesAsSelectListAsync(),
-                SelectedCoachesNames = sport.SportsCoaches.Select(sc => $"{sc.Coach.FirstName} {sc.Coach.LastName}").ToList(),
+                ImageUrl = sport.ImageUrl
             };
 
             return model;
         }
         public async Task UpdateSportAsync(SportEditViewModel model)
         {
-            var sport = await GetByIdWithCoachesAsync(model.Id);
+            var sport = await GetByIdAsync(model.Id);
          
             if (sport != null)
             {              
@@ -69,28 +64,9 @@ namespace SportsHall.Services.Data
                 sport.MaxParticipants = model.MaxParticipants;
                 sport.ImageUrl = model.ImageUrl;
 
-                var currentCoachIds = sport.SportsCoaches.Select(sc => sc.CoachId).ToList();
-
-                var coachIdsToRemove = currentCoachIds.Except(model.SelectedCoaches).ToList();
-                var coachIdsToAdd = model.SelectedCoaches.Except(currentCoachIds).ToList();
-
-                sport.SportsCoaches = sport.SportsCoaches
-                    .Where(sc => !coachIdsToRemove.Contains(sc.CoachId))
-                    .ToList();
-
-                foreach (var coachId in coachIdsToAdd)
-                {
-                    sport.SportsCoaches.Add(new SportCoach
-                    {
-                        SportId = sport.Id,
-                        CoachId = coachId,
-                    });
-                }
-
                 await this.sportRepository.UpdateAsync(sport);
             }  
         }
-
         public async Task DeleteAsync (int id)
         {
             var sport = await sportRepository.GetByIdAsync(id);
@@ -101,9 +77,7 @@ namespace SportsHall.Services.Data
                 await sportRepository.DeleteAsync(sport);
      
             }
-
         }
-
         public async Task<Sport> CreateAsync(SportEditViewModel model)
         {
             var sport = new Sport
@@ -111,30 +85,20 @@ namespace SportsHall.Services.Data
                 Name = model.Name,
                 Description = model.Description,
                 MaxParticipants = model.MaxParticipants,
-                ImageUrl = model.ImageUrl,
-                
+                ImageUrl = model.ImageUrl,               
             };
 
             await sportRepository.AddAsync(sport);
             return sport;
         }
-
-
-
-        public async Task<Sport> GetByIdWithCoachesAsync(int id)
-        {
-            var sport = await this.sportRepository
-                .GetAllAttached()
-                .Include(s => s.SportsCoaches)
-                .ThenInclude(sc => sc.Coach)
-                .FirstOrDefaultAsync(s => s.Id == id);
-
-            return sport;
-        }
-
         public async Task<Sport> GetByIdAsync(int id)
         {
             return await sportRepository.GetByIdAsync(id);
+        }
+        public async Task<IEnumerable<SelectListItem>> GetSportsAsSelectItemAsync()
+        {
+            return (await sportRepository.GetAllAsync())
+                .Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name });
         }
     }
 }
