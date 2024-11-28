@@ -1,0 +1,36 @@
+﻿@model IEnumerable<SportsHall.Web.ViewModels.TrainingsViewModel>
+
+<div class="container mt-5">
+    <h2 class="text-center">All Trainings</h2>
+    <table class="table table-bordered table-hover mt-3">
+        <thead>
+            <tr>
+                <th>Sport</th>
+                <th>Coach</th>
+                <th>Status</th>
+                <th>Starting Time</th>
+                <th>Duration</th>
+                <th>Location</th>
+                <th>Available Spots</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var training in Model)
+            {
+                <tr>
+                    <td>@training.SportName</td>
+                    <td>@training.CoachName</td>
+                    <td>@training.TrainingStatus</td>
+                    <td>@training.Start.ToString("dd.MM.yyyy HH:mm")</td>
+                    <td>@training.Duration min</td>
+                    <td>@training.Location</td>
+                    <td>@training.AvailableSpot</td>
+                    <td>
+                        <a asp-controller="Training" asp-action="SignUp" asp-route-id="@training.Id" class="btn btn-primary">Sign Up</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

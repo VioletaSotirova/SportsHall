@@ -19,9 +19,9 @@ namespace SportsHall.Data
 
         public DbSet<Sport> Sports { get; set; }
         public DbSet<Coach> Coaches { get; set; }
-        public DbSet<SportCoach> SportsCoaches { get; set; }
         public DbSet<Training> Trainings { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
+        public DbSet<TrainingStatus> TrainingsStatuses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

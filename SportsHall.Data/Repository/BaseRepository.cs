@@ -41,7 +41,6 @@ namespace SportsHall.Data.Repository
 
             return true;
         }
-
         public IEnumerable<TType> GetAll()
         {
             return this.dbSet.ToArray();

@@ -42,46 +42,79 @@ namespace SportsHall.Services.Data
 
             return coaches;
         }
-
-        public async Task<List<SelectListItem>> GetAllCoachesAsSelectListAsync()
+        public async Task<CoachEditViewModel> EditAsync(int id)
         {
-            var coaches = await this.coachRepository
-                .GetAllAttached()
-                .Select(c => new SelectListItem
-                {
-                    Text = $"{c.FirstName} {c.LastName}",
-                    Value = c.Id.ToString()
-                })
-                .ToListAsync();
+            var coach = await GetCoachByIdAsync(id);
 
-            return coaches;
+            var model = new CoachEditViewModel
+            {
+                Id = coach.Id,
+                FirstName = coach.FirstName,
+                LastName = coach.LastName,
+                Phone = coach.Phone,
+                Email = coach.Email,
+                Expirience = coach.Expirience,
+                ImageUrl = coach.ImageUrl,
+            };
+
+            return model;
         }
 
-        public async Task<List<string>> GetCoachNamesByIdsAsync(List<int> coachIds)
+        public async Task UpdateCoachAsync(CoachEditViewModel model)
         {
-            return await this.coachRepository
-                .GetAllAttached() 
-                .Where(c => coachIds.Contains(c.Id))
-                .Select(c => $"{c.FirstName} {c.LastName}")
-                .ToListAsync();
+            var coach = await GetCoachByIdAsync(model.Id);
+
+            if (coach != null)
+            {
+                coach.FirstName = model.FirstName;
+                coach.LastName = model.LastName;
+                coach.Expirience = model.Expirience;
+                coach.Phone = model.Phone;
+                coach.Email = model.Email;
+                coach.ImageUrl = model.ImageUrl;
+
+                await this.coachRepository.UpdateAsync(coach);
+            }
         }
 
-        public async Task<Coach> GetByIdWithSportsAsync(int id)
+        public async Task<Coach> CreateAsync(CoachEditViewModel model)
         {
-            var coach = await this.coachRepository
-                .GetAllAttached()
-                .Include(c => c.SportsCoaches)
-                .ThenInclude(sc => sc.Sport)
-                .FirstOrDefaultAsync();
+            var coach = new Coach
+            {
+               FirstName = model.FirstName,
+               LastName = model.LastName,
+               Expirience = model.Expirience,
+               Phone = model.Phone,
+               Email = model.Email,
+               ImageUrl = model.ImageUrl,
+            };
 
+            await coachRepository.AddAsync(coach);
             return coach;
         }
 
+        public async Task DeleteAsync(int id)
+        {
+            var coach = await coachRepository.GetByIdAsync(id);
+
+            if (coach != null)
+            {
+
+                await coachRepository.DeleteAsync(coach);
+
+            }
+        }
         public async Task<Coach> GetCoachByIdAsync(int id)
         {
            var coach = await this.coachRepository.GetByIdAsync(id);
 
             return coach;
+        }
+
+        public async Task<IEnumerable<SelectListItem>> GetCoachesAsSelectItemAsync()
+        {
+            return (await coachRepository.GetAllAsync())
+                .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = $"{c.FirstName} {c.LastName}" });
         }
     }
 }
