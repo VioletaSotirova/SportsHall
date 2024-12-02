@@ -13,6 +13,6 @@ namespace SportsHall.Services.Data.Interfaces
         Task<Sport> GetByIdAsync(int id);
         Task DeleteAsync(int id);
         Task<Sport> CreateAsync(SportEditViewModel model);
-        Task<IEnumerable<SelectListItem>> GetSportsAsSelectItemAsync();
+        Task<ICollection<SelectListItem>> GetSportsAsSelectItemAsync();
     }
 }
