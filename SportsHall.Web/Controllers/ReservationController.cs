@@ -37,7 +37,7 @@ namespace SportsHall.Web.Controllers
                 return Unauthorized();
             }
 
-                await reservationService.SignUpAsync(trainingId, userId);
+            await reservationService.SignUpAsync(trainingId, userId);
 
             return RedirectToAction("Index");
         }

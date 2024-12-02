@@ -39,7 +39,7 @@ namespace SportsHall.Services.Data
                 Start = t.Start,
                 Location = t.Location,
                 Duration = t.Duration,
-                AvailableSpot = t.Sport.MaxParticipants,
+                AvailableSpot = t.AvailableSpot,
                // IsUserSigned = t.Reservations.Any(x => x.UserId == userId && t.Id == x.TrainingId)
             });
 
