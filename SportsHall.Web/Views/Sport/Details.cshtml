@@ -7,6 +7,9 @@
         <p class="card-text">@Model.Description</p>
         <a href="#" class="btn btn-primary float-end">Sign Up</a>
         <a asp-controller="Sport" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-        <a asp-controller="Sport" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-primary">Delete</a>
+        <form asp-controller="Sport" asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display:inline;">
+            @Html.AntiForgeryToken()
+            <button type="submit" class="btn btn-danger">Delete</button>
+        </form>      
     </div>
 </div>

@@ -61,7 +61,7 @@ namespace SportsHall.Web.Controllers
             await sportService.UpdateSportAsync(model);
             return RedirectToAction("Index");
         }
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             var sport = await sportService.GetByIdAsync(id);

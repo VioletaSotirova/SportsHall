@@ -14,7 +14,10 @@
                 <p class="card-text">@Model.Expirience</p>
             </div>
             <div class="card-footer d-flex justify-content-start">
-                <a asp-controller="Coach" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger me-2">Delete</a>
+                <form asp-controller="Coach" asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display:inline;">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                </form>
                 <a asp-controller="Coach" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
             </div>
         </div>

@@ -48,7 +48,6 @@ namespace SportsHall.Web.Controllers
             return View(coach);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Edit(CoachEditViewModel model, int id)
         {
@@ -81,7 +80,7 @@ namespace SportsHall.Web.Controllers
             return RedirectToAction(nameof(All));
         }
 
-        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
             var coach = await coachService.GetCoachByIdAsync(id);
