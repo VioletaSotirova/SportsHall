@@ -41,5 +41,20 @@ namespace SportsHall.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public async Task<IActionResult> CancelReservation(int trainingId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            await reservationService.CancelAsync(trainingId, userId);
+
+            return RedirectToAction("Index");
+        }
     }
 }

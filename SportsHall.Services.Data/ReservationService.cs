@@ -49,8 +49,16 @@ namespace SportsHall.Services.Data
                 };
 
                 training.AvailableSpot = training.AvailableSpot - 1;
-                await reservationRepository.AddAsync(newReservation);              
+                await reservationRepository.AddAsync(newReservation);
             }
+        }
+        public async Task CancelAsync(int trainingId,string userId)
+        {
+            var reservation = await reservationRepository.GetReservationAsync(trainingId, userId);
+            var training = await trainingService.GetByIdAsync(trainingId);
+
+            training.AvailableSpot = training.AvailableSpot + 1;
+            await reservationRepository.DeleteAsync(reservation);
         }
     }
 }
