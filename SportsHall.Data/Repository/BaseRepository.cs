@@ -7,7 +7,7 @@ namespace SportsHall.Data.Repository
     public class BaseRepository<TType, TId> : IRepository<TType, TId>
         where TType : class
     {
-        private readonly SportsHallDbContext dbContext;
+        protected readonly SportsHallDbContext dbContext;
         private readonly DbSet<TType> dbSet;
         public BaseRepository(SportsHallDbContext dbContext)
         {
@@ -46,7 +46,7 @@ namespace SportsHall.Data.Repository
             return this.dbSet.ToArray();
         }
 
-        public async Task<IEnumerable<TType>> GetAllAsync()
+        public async Task<ICollection<TType>> GetAllAsync()
         {
             return await this.dbSet.ToArrayAsync();
         }
@@ -102,6 +102,5 @@ namespace SportsHall.Data.Repository
                 return false;
             }
         }
-
     }
 }
