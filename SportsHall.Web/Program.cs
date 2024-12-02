@@ -46,11 +46,13 @@ namespace SportsHall.Web
             builder.Services.AddScoped<IRepository<Reservation, int>, BaseRepository<Reservation, int>>();
             builder.Services.AddScoped<IRepository<Training, int>, BaseRepository<Training, int>>();
             builder.Services.AddScoped<IRepository<TrainingStatus, int>, BaseRepository<TrainingStatus, int>>();
+            builder.Services.AddScoped<IReservationRepository, ReservationRepository>();
 
             builder.Services.AddScoped<ISportService, SportService>();
             builder.Services.AddScoped<ICoachService, CoachService>();
             builder.Services.AddScoped<ITrainingService, TrainingService>();
             builder.Services.AddScoped<ITrainingStatusService, TrainingStatusService>();
+            builder.Services.AddScoped<IReservationService, ReservationService>();
 
             var app = builder.Build();
 
