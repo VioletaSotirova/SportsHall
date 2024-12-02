@@ -11,7 +11,7 @@ namespace SportsHall.Services.Data.Interfaces
 {
     public interface ITrainingStatusService
     {
-        Task <IEnumerable<TrainingStatus>> GetAllStatusesAsync();
-        Task<IEnumerable<SelectListItem>> GetTrainingStatusesAsSelectItemAsync();
+        Task <ICollection<TrainingStatus>> GetAllStatusesAsync();
+        Task<ICollection<SelectListItem>> GetTrainingStatusesAsSelectItemAsync();
     }
 }

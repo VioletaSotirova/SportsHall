@@ -13,16 +13,17 @@ namespace SportsHall.Services.Data
         {
             this.trainingStatusRepository = trainingStatusRepository;
         }
-        public async Task<IEnumerable<TrainingStatus>> GetAllStatusesAsync()
+        public async Task<ICollection<TrainingStatus>> GetAllStatusesAsync()
         {
             var trainingStatuses = await trainingStatusRepository.GetAllAsync();
 
             return trainingStatuses;
         }
-        public async Task<IEnumerable<SelectListItem>> GetTrainingStatusesAsSelectItemAsync()
+        public async Task<ICollection<SelectListItem>> GetTrainingStatusesAsSelectItemAsync()
         {
             return (await trainingStatusRepository.GetAllAsync())
-                .Select(ts => new SelectListItem { Value = ts.Id.ToString(), Text = ts.Name });
+                .Select(ts => new SelectListItem { Value = ts.Id.ToString(), Text = ts.Name })
+                .ToList();
         }
     }
 }

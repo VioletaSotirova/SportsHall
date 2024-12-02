@@ -73,9 +73,7 @@ namespace SportsHall.Services.Data
 
             if (sport != null)
             {
-
                 await sportRepository.DeleteAsync(sport);
-     
             }
         }
         public async Task<Sport> CreateAsync(SportEditViewModel model)
@@ -95,10 +93,11 @@ namespace SportsHall.Services.Data
         {
             return await sportRepository.GetByIdAsync(id);
         }
-        public async Task<IEnumerable<SelectListItem>> GetSportsAsSelectItemAsync()
+        public async Task<ICollection<SelectListItem>> GetSportsAsSelectItemAsync()
         {
             return (await sportRepository.GetAllAsync())
-                .Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name });
+                .Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name })
+                .ToList();
         }
     }
 }
