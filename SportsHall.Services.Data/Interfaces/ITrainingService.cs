@@ -15,5 +15,9 @@ namespace SportsHall.Services.Data.Interfaces
         Task<List<Training>> GetAllTrainingsAsync();
         Task<TrainingCreateViewModel> GetCreateTrainingViewModel();
         Task<Training> CreateAsync(TrainingCreateViewModel model);
+        Task<TrainingCreateViewModel> EditAsync(int id);
+        Task UpdateAsync(TrainingCreateViewModel model);
+        Task DeleteAsync(int id);
+        Task<Training> GetByIdAsync(int id);
     }
 }

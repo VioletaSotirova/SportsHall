@@ -1,7 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using SportsHall.Data;
+using SportsHall.Data.Models;
+using SportsHall.Services.Data;
 using SportsHall.Services.Data.Interfaces;
 using SportsHall.Web.ViewModels;
+using System.Security.Claims;
 
 namespace SportsHall.Web.Controllers
 {
@@ -15,6 +19,8 @@ namespace SportsHall.Web.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            var getCurrentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+       
             IEnumerable<TrainingsViewModel> trainings =
               await this.trainingService.GetAllAsync();
 
@@ -34,11 +40,49 @@ namespace SportsHall.Web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                trainingService.GetCreateTrainingViewModel();
+                model = await trainingService.GetCreateTrainingViewModel();
+
                 return this.View(model);
             }
 
             await trainingService.CreateAsync(model);
+
+            return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var training = await trainingService.EditAsync(id);
+
+            if (training == null)
+            {
+                return NotFound();
+            }
+                   
+            return View(training);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Edit(TrainingCreateViewModel model, int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                model = await trainingService.GetCreateTrainingViewModel();
+                return View(model);
+            }
+
+            await trainingService.UpdateAsync(model);
+            return RedirectToAction(nameof(Index));
+        }
+        [HttpPost]
+        public async Task<IActionResult> Delete(int id)
+        {
+            var training = await trainingService.GetByIdAsync(id);
+
+            if (training == null)
+            {
+                return NotFound();
+            }
+            await trainingService.DeleteAsync(training.Id);
 
             return RedirectToAction("Index");
         }

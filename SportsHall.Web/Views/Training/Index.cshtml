@@ -27,7 +27,18 @@
                     <td>@training.Location</td>
                     <td>@training.AvailableSpot</td>
                     <td>
-                        <a asp-controller="Training" asp-action="SignUp" asp-route-id="@training.Id" class="btn btn-primary">Sign Up</a>
+                        <form asp-controller="Reservation" asp-action="SignUp" asp-route-trainingId="@training.Id" method="post">
+                            <button type="submit">Sign Up</button>
+                        </form>
+                    </td>
+                    <td>
+                        <a asp-controller="Training" asp-action="Edit" asp-route-id="@training.Id" class="btn btn-primary">Edit</a>
+                    </td>
+                    <td>
+                        <form asp-controller="Training" asp-action="Delete" asp-route-id="@training.Id" method="post" style="display:inline;">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
             }

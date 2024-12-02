@@ -13,5 +13,6 @@ namespace SportsHall.Web.ViewModels
         public string Location { get; set; } = null!;
         public int Duration { get; set; }
         public int AvailableSpot { get; set; }
+        public bool IsUserSigned { get; set; }
     }
 }
