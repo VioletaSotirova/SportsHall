@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using SportsHall.Data.Models;
 
 namespace SportsHall.Web.ViewModels
 {
