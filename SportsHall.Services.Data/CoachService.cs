@@ -6,9 +6,6 @@ using SportsHall.Services.Data.Interfaces;
 using SportsHall.Web.ViewModels;
 using SportsHall.Services.Mapping;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Security.Cryptography;
-
-
 
 
 namespace SportsHall.Services.Data
@@ -111,10 +108,11 @@ namespace SportsHall.Services.Data
             return coach;
         }
 
-        public async Task<IEnumerable<SelectListItem>> GetCoachesAsSelectItemAsync()
+        public async Task<ICollection<SelectListItem>> GetCoachesAsSelectItemAsync()
         {
             return (await coachRepository.GetAllAsync())
-                .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = $"{c.FirstName} {c.LastName}" });
+                .Select(c => new SelectListItem { Value = c.Id.ToString(), Text = $"{c.FirstName} {c.LastName}" })
+                .ToList();
         }
     }
 }

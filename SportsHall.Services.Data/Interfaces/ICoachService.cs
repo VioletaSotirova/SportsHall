@@ -13,6 +13,6 @@ namespace SportsHall.Services.Data.Interfaces
         Task UpdateCoachAsync(CoachEditViewModel model);
         Task<Coach> CreateAsync(CoachEditViewModel model);
         Task DeleteAsync(int id);
-        Task<IEnumerable<SelectListItem>> GetCoachesAsSelectItemAsync();
+        Task<ICollection<SelectListItem>> GetCoachesAsSelectItemAsync();
     }
 }
