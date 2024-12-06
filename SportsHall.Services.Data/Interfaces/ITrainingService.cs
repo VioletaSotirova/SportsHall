@@ -10,7 +10,7 @@ namespace SportsHall.Services.Data.Interfaces
 {
     public interface ITrainingService
     {
-        Task<IEnumerable<TrainingsViewModel>> GetAllAsync();
+        Task<IEnumerable<TrainingsViewModel>> GetAllAsync(string userId);
         Task<Training> GetByIdIncludeAsync(int id);
         Task<List<Training>> GetAllTrainingsAsync();
         Task<TrainingCreateViewModel> GetCreateTrainingViewModel();
