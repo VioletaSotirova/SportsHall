@@ -13,12 +13,12 @@ namespace SportsHall.Data.Configuration
             builder.HasOne(r => r.Training)
                   .WithMany(t => t.Reservations)
                   .HasForeignKey(r => r.TrainingId)
-                  .OnDelete(DeleteBehavior.Cascade); 
+                  .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(r => r.ApplicationUser)
                   .WithMany(u => u.Reservations)
                   .HasForeignKey(r => r.UserId)
-                  .OnDelete(DeleteBehavior.Cascade);  
+                  .OnDelete(DeleteBehavior.Cascade);         
         }
     }
 }

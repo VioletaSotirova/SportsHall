@@ -22,7 +22,6 @@ namespace SportsHall.Data.Configuration
                 .HasForeignKey(t => t.CoachId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-
             builder.HasOne(t => t.TrainingStatus)
                 .WithMany()
                 .HasForeignKey(t => t.TrainingStatusId);
