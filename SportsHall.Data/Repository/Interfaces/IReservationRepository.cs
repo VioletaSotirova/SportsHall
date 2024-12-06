@@ -6,5 +6,7 @@ namespace SportsHall.Data.Repository.Interfaces
     {
         Task<Reservation> GetReservationAsync(int trainingId, string userId);
         Task<IEnumerable<Reservation>> GetReservationsByUserIdAsync(string userId);
+        Task SignUpAsync(int trainingId, string userId);
+        Task CancelAsync(int reservationId);
     }
 }

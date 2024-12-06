@@ -11,6 +11,6 @@ namespace SportsHall.Services.Data.Interfaces
     {
         Task<IEnumerable<ReservationViewModel>> GetUserReservationsAsync(string userId);
         Task SignUpAsync(int trainingId, string userId);
-        Task CancelAsync(int trainingId, string userId);
+        Task CancelAsync(int reservationId);
     }
 }

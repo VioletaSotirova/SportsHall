@@ -29,5 +29,36 @@ namespace SportsHall.Data.Repository
 
             return reservations;
         }
+
+        public async Task SignUpAsync(int trainingId, string userId)
+        {
+            var reservation = await GetReservationAsync(trainingId, userId);
+            var training = await dbContext.Trainings.FirstOrDefaultAsync(t => t.Id == trainingId);
+
+            if (reservation == null && training.AvailableSpot > 0)
+            {
+                Reservation newReservation = new Reservation()
+                {
+                    TrainingId = trainingId,
+                    UserId = int.Parse(userId),
+                    CreatedOn = DateTime.UtcNow
+                };
+
+                training.AvailableSpot = training.AvailableSpot - 1;
+
+                await dbContext.Reservations.AddAsync(newReservation);
+                await dbContext.SaveChangesAsync();
+            }
+        }
+
+        public async Task CancelAsync(int reservationId)
+        {
+            var reservation = await GetByIdAsync(reservationId);
+
+            var training = await dbContext.Trainings.FindAsync(reservation.TrainingId);
+
+            training.AvailableSpot = training.AvailableSpot + 1;
+            await DeleteAsync(reservation);
+        }
     }
 }

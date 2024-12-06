@@ -22,6 +22,7 @@ namespace SportsHall.Services.Data
 
             var models = reservations.Select(r => new ReservationViewModel
             {
+                Id = r.Id,
                 TrainingId = r.TrainingId,
                 SportName = r.Training.Sport.Name,
                 CoachName = $"{r.Training.Coach.FirstName} {r.Training.Coach.LastName}",
@@ -35,30 +36,11 @@ namespace SportsHall.Services.Data
 
         public async Task SignUpAsync(int trainingId, string userId)
         {
-            var reservation = await reservationRepository.GetReservationAsync(trainingId, userId);
-
-            var training = await trainingService.GetByIdAsync(trainingId);
-
-            if (reservation == null && training.AvailableSpot > 0)
-            {
-                Reservation newReservation = new Reservation()
-                {
-                    TrainingId = trainingId,
-                    UserId = int.Parse(userId),
-                    CreatedOn = DateTime.UtcNow
-                };
-
-                training.AvailableSpot = training.AvailableSpot - 1;
-                await reservationRepository.AddAsync(newReservation);
-            }
+            await reservationRepository.SignUpAsync(trainingId, userId);
         }
-        public async Task CancelAsync(int trainingId,string userId)
+        public async Task CancelAsync(int reservationId)
         {
-            var reservation = await reservationRepository.GetReservationAsync(trainingId, userId);
-            var training = await trainingService.GetByIdAsync(trainingId);
-
-            training.AvailableSpot = training.AvailableSpot + 1;
-            await reservationRepository.DeleteAsync(reservation);
+            await reservationRepository.CancelAsync(reservationId);
         }
     }
 }
