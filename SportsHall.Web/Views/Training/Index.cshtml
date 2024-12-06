@@ -27,9 +27,23 @@
                     <td>@training.Location</td>
                     <td>@training.AvailableSpot</td>
                     <td>
-                        <form asp-controller="Reservation" asp-action="SignUp" asp-route-trainingId="@training.Id" method="post">
-                            <button type="submit" class="btn btn-success">Sign Up</button>
-                        </form>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            if (training.IsCurrentUserSigned)
+                            {
+                                <p>Signed Up</p>
+                            }
+                            else
+                            {
+                                <form asp-controller="Reservation" asp-action="SignUp" asp-route-trainingId="@training.Id" method="post" style="display:inline;">
+                                    <button type="submit" class="btn btn-success">Sign Up</button>
+                                </form>
+                            }
+                        }
+                        else
+                        {
+                            <span class="text-muted">Log in to sign up</span>
+                        }
                     </td>
                     <td>
                         <a asp-controller="Training" asp-action="Edit" asp-route-id="@training.Id" class="btn btn-primary">Edit</a>
