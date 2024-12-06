@@ -19,10 +19,10 @@ namespace SportsHall.Web.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var getCurrentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-       
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
             IEnumerable<TrainingsViewModel> trainings =
-              await this.trainingService.GetAllAsync();
+              await this.trainingService.GetAllAsync(userId);
 
             return View(trainings); 
         }

@@ -13,7 +13,7 @@
         public string Location { get; set; } = null!;
         public int Duration { get; set; }
         public int AvailableSpot { get; set; }
-        public IEnumerable<Reservation> Reservations { get; set; } = new List<Reservation>();
+        public IList<Reservation> Reservations { get; set; } = new List<Reservation>();
 
     }
 }

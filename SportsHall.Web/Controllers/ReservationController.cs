@@ -43,7 +43,7 @@ namespace SportsHall.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CancelReservation(int trainingId)
+        public async Task<IActionResult> CancelReservation(int reservationId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -52,7 +52,7 @@ namespace SportsHall.Web.Controllers
                 return Unauthorized();
             }
 
-            await reservationService.CancelAsync(trainingId, userId);
+            await reservationService.CancelAsync(reservationId);
 
             return RedirectToAction("Index");
         }
