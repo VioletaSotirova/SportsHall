@@ -6,6 +6,7 @@ using SportsHall.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Security.Claims;
 using Microsoft.AspNetCore.SignalR;
+using SportsHall.Services.Mapping;
 
 
 
@@ -26,24 +27,20 @@ namespace SportsHall.Services.Data
             this.coachService = coachService;
             this.trainingStatusService = trainingStatusService;
         }
-        public async Task<IEnumerable<TrainingsViewModel>> GetAllAsync()
+        public async Task<IEnumerable<TrainingsViewModel>> GetAllAsync(string userId)
         {
             var trainings = await GetAllTrainingsAsync();
 
-            var model = trainings.Select(t => new TrainingsViewModel
+            var models = trainings.Select(training =>
             {
-                Id = t.Id,
-                SportName = t.Sport.Name,
-                CoachName = $"{t.Coach.FirstName} {t.Coach.LastName}",
-                TrainingStatus = t.TrainingStatus.Name,
-                Start = t.Start,
-                Location = t.Location,
-                Duration = t.Duration,
-                AvailableSpot = t.AvailableSpot,
-               // IsUserSigned = t.Reservations.Any(x => x.UserId == userId && t.Id == x.TrainingId)
-            });
+                var model = AutoMapperConfig.MapperInstance.Map<TrainingsViewModel>(training);
 
-            return model;
+                model.IsCurrentUserSigned = training.Reservations.Any(r => r.UserId == int.Parse(userId));
+
+                return model;
+            }).ToList();
+ 
+            return models;
         }
         public async Task<TrainingCreateViewModel> GetCreateTrainingViewModel()
         {
@@ -71,7 +68,8 @@ namespace SportsHall.Services.Data
                 Start = model.Start,
                 Location = model.Location,
                 Duration = model.Duration,
-                TrainingStatusId = model.TrainingStatusId
+                TrainingStatusId = model.TrainingStatusId,
+                AvailableSpot = await sportService.GetSportMaxParticipantsAsync(model.SportId)
             };
 
             await trainingRepository.AddAsync(training);
@@ -135,6 +133,7 @@ namespace SportsHall.Services.Data
                 .Include(t => t.Sport)
                 .Include(t => t.Coach)
                 .Include(t => t.TrainingStatus)
+                .Include(t => t.Reservations)
                 .ToListAsync();
 
             return trainings;

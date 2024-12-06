@@ -2,6 +2,7 @@
 {
     public class ReservationViewModel
     {
+        public int Id { get; set; }
         public int TrainingId { get; set; }
         public string SportName { get; set; } = null!;
         public string CoachName { get; set; } = null!;

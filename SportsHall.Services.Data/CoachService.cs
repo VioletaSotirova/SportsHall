@@ -8,6 +8,7 @@ using SportsHall.Services.Mapping;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 
+
 namespace SportsHall.Services.Data
 {
     public class CoachService : ICoachService
@@ -43,7 +44,8 @@ namespace SportsHall.Services.Data
         {
             var coach = await GetCoachByIdAsync(id);
 
-            var model = new CoachEditViewModel
+            var model = AutoMapperConfig.MapperInstance.Map<CoachEditViewModel>(coach);
+            /*var model = new CoachEditViewModel
             {
                 Id = coach.Id,
                 FirstName = coach.FirstName,
@@ -52,7 +54,7 @@ namespace SportsHall.Services.Data
                 Email = coach.Email,
                 Expirience = coach.Expirience,
                 ImageUrl = coach.ImageUrl,
-            };
+            };*/
 
             return model;
         }

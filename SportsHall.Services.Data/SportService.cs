@@ -42,15 +42,8 @@ namespace SportsHall.Services.Data
         {
             var sport = await GetByIdAsync(id);
 
-            var model = new SportEditViewModel
-            {
-                Id = sport.Id,
-                Name = sport.Name,
-                Description = sport.Description,
-                MaxParticipants = sport.MaxParticipants,
-                ImageUrl = sport.ImageUrl
-            };
-
+            var model = AutoMapperConfig.MapperInstance.Map<SportEditViewModel>(sport);
+   
             return model;
         }
         public async Task UpdateSportAsync(SportEditViewModel model)
@@ -98,6 +91,11 @@ namespace SportsHall.Services.Data
             return (await sportRepository.GetAllAsync())
                 .Select(s => new SelectListItem { Value = s.Id.ToString(), Text = s.Name })
                 .ToList();
+        }
+        public async Task<int> GetSportMaxParticipantsAsync(int sportId)
+        {
+            var sport = await this.sportRepository.GetByIdAsync(sportId);
+            return sport?.MaxParticipants ?? 0;
         }
     }
 }
