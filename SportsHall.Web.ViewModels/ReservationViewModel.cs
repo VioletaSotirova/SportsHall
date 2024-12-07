@@ -1,6 +1,9 @@
-﻿namespace SportsHall.Web.ViewModels
+﻿using SportsHall.Data.Models;
+using SportsHall.Services.Mapping;
+
+namespace SportsHall.Web.ViewModels
 {
-    public class ReservationViewModel
+    public class ReservationViewModel : IMapFrom<Reservation>
     {
         public int Id { get; set; }
         public int TrainingId { get; set; }

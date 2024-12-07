@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.SignalR;
 using SportsHall.Services.Mapping;
 
 
-
 namespace SportsHall.Services.Data
 {
     public class TrainingService : ITrainingService

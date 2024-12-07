@@ -45,16 +45,6 @@ namespace SportsHall.Services.Data
             var coach = await GetCoachByIdAsync(id);
 
             var model = AutoMapperConfig.MapperInstance.Map<CoachEditViewModel>(coach);
-            /*var model = new CoachEditViewModel
-            {
-                Id = coach.Id,
-                FirstName = coach.FirstName,
-                LastName = coach.LastName,
-                Phone = coach.Phone,
-                Email = coach.Email,
-                Expirience = coach.Expirience,
-                ImageUrl = coach.ImageUrl,
-            };*/
 
             return model;
         }

@@ -3,17 +3,16 @@ using SportsHall.Data.Models;
 using SportsHall.Data.Repository.Interfaces;
 using SportsHall.Services.Data.Interfaces;
 using SportsHall.Web.ViewModels;
+using SportsHall.Services.Mapping;
 
 namespace SportsHall.Services.Data
 {
     public class ReservationService : IReservationService
     {
         private IReservationRepository reservationRepository;
-        private ITrainingService trainingService;
-        public ReservationService(IReservationRepository reservationRepository, ITrainingService trainingService)
+        public ReservationService(IReservationRepository reservationRepository)
         {
             this.reservationRepository = reservationRepository;
-            this.trainingService = trainingService;
         }
 
         public async Task<IEnumerable<ReservationViewModel>> GetUserReservationsAsync(string userId)
