@@ -2,6 +2,12 @@
 
 <div class="container mt-5">
     <h2 class="text-center">All Trainings</h2>
+
+    <form asp-controller="Training" asp-action="Search" method="get" class="d-flex mb-4">
+        <input type="text" name="sportName" class="form-control" placeholder="Search by Sport Name" />
+        <button type="submit" class="btn btn-primary ms-2">Search</button>
+    </form>
+
     <table class="table table-bordered table-hover mt-3">
         <thead>
             <tr>
@@ -16,45 +22,54 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var training in Model)
+            @if (!Model.Any())
             {
                 <tr>
-                    <td>@training.SportName</td>
-                    <td>@training.CoachName</td>
-                    <td>@training.TrainingStatus</td>
-                    <td>@training.Start.ToString("dd.MM.yyyy HH:mm")</td>
-                    <td>@training.Duration min</td>
-                    <td>@training.Location</td>
-                    <td>@training.AvailableSpot</td>
-                    <td>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            if (training.IsCurrentUserSigned)
+                    <td colspan="8" class="text-center">No trainings found.</td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var training in Model)
+                {
+                    <tr>
+                        <td>@training.SportName</td>
+                        <td>@training.CoachName</td>
+                        <td>@training.TrainingStatus</td>
+                        <td>@training.Start.ToString("dd.MM.yyyy HH:mm")</td>
+                        <td>@training.Duration min</td>
+                        <td>@training.Location</td>
+                        <td>@training.AvailableSpot</td>
+                        <td>
+                            @if (User.Identity.IsAuthenticated)
                             {
-                                <p>Signed Up</p>
+                                if (training.IsCurrentUserSigned)
+                                {
+                                    <p>Signed Up</p>
+                                }
+                                else
+                                {
+                                    <form asp-controller="Reservation" asp-action="SignUp" asp-route-trainingId="@training.Id" method="post" style="display:inline;">
+                                        <button type="submit" class="btn btn-success">Sign Up</button>
+                                    </form>
+                                }
                             }
                             else
                             {
-                                <form asp-controller="Reservation" asp-action="SignUp" asp-route-trainingId="@training.Id" method="post" style="display:inline;">
-                                    <button type="submit" class="btn btn-success">Sign Up</button>
-                                </form>
+                                <span class="text-muted">Log in to sign up</span>
                             }
-                        }
-                        else
-                        {
-                            <span class="text-muted">Log in to sign up</span>
-                        }
-                    </td>
-                    <td>
-                        <a asp-controller="Training" asp-action="Edit" asp-route-id="@training.Id" class="btn btn-primary">Edit</a>
-                    </td>
-                    <td>
-                        <form asp-controller="Training" asp-action="Delete" asp-route-id="@training.Id" method="post" style="display:inline;">
-                            @Html.AntiForgeryToken()
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </td>
-                </tr>
+                        </td>
+                        <td>
+                            <a asp-controller="Training" asp-action="Edit" asp-route-id="@training.Id" class="btn btn-primary">Edit</a>
+                        </td>
+                        <td>
+                            <form asp-controller="Training" asp-action="Delete" asp-route-id="@training.Id" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
             }
         </tbody>
     </table>

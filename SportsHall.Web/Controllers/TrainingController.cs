@@ -86,5 +86,17 @@ namespace SportsHall.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Search(string sportName)
+        {
+            if (string.IsNullOrWhiteSpace(sportName))
+            {
+                return View("Index", new List<TrainingsViewModel>());
+            }
+
+            var trainings = await trainingService.GetTrainingsBySportNameAsync(sportName);
+            return View("Index", trainings);
+        }
     }
 }

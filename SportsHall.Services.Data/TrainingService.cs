@@ -151,5 +151,14 @@ namespace SportsHall.Services.Data
         {
             return await trainingRepository.GetByIdAsync(id);
         }
+        public async Task<IEnumerable<TrainingsViewModel>> GetTrainingsBySportNameAsync(string sportName)
+        {
+            var trainings = await trainingRepository.GetAllAttached()
+                .Where(t => t.Sport.Name.ToLower().Contains(sportName.ToLower()))
+                .To<TrainingsViewModel>()
+                .ToListAsync();
+
+            return trainings;
+        }
     }
 }
