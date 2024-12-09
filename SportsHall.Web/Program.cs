@@ -13,7 +13,7 @@ namespace SportsHall.Web
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -23,19 +23,15 @@ namespace SportsHall.Web
 
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
-
             builder.Services.AddDbContext<SportsHallDbContext>(options =>
                 options.UseSqlServer(connectionString));
- 
+
             builder.Services.AddIdentity<ApplicationUser, IdentityRole<int>>(cfg =>
             {
                 ConfigureIdentity(builder, cfg);
             })
-                //.AddSignInManager<UserManager<ApplicationUser>>()
-                //.AddUserManager<UserManager<ApplicationUser>>()
-                // .AddUserStore<ApplicationUser>()
-                .AddEntityFrameworkStores<SportsHallDbContext>()
-                .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<SportsHallDbContext>()
+            .AddDefaultTokenProviders();
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
             builder.Services.AddRazorPages();
@@ -80,6 +76,41 @@ namespace SportsHall.Web
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
             app.MapRazorPages();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
+
+                var roles = new[] { "Admin", "User" };
+
+                foreach (var role in roles)
+                {
+                    if (!await roleManager.RoleExistsAsync(role))
+                    {
+                        await roleManager.CreateAsync(new IdentityRole<int>(role));
+                    }
+                }
+            }
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+
+                string email = "admin@admin.com";
+                string password = "Admin123,";
+
+                if (await userManager.FindByEmailAsync(email) == null)
+                {
+                    var user = new ApplicationUser();
+                    user.UserName = email;
+                    user.Email = email;
+                    user.EmailConfirmed = true;
+
+                    await userManager.CreateAsync(user, password);
+
+                    await userManager.AddToRoleAsync(user, "Admin");
+                }
+            }
 
             app.Run();
         }

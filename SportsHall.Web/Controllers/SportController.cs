@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SportsHall.Services.Data.Interfaces;
 
 using SportsHall.Web.ViewModels;
@@ -37,6 +38,7 @@ namespace SportsHall.Web.Controllers
             return View(sport);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -50,6 +52,7 @@ namespace SportsHall.Web.Controllers
             return View(sport);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(SportEditViewModel model, int id)
         {
@@ -61,6 +64,8 @@ namespace SportsHall.Web.Controllers
             await sportService.UpdateSportAsync(model);
             return RedirectToAction("Index");
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -75,6 +80,7 @@ namespace SportsHall.Web.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -83,9 +89,15 @@ namespace SportsHall.Web.Controllers
 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(SportEditViewModel model)
         {
+            var existingSport = await sportService.GetByIdAsync(model.Id);
+            if (existingSport != null)
+            {
+                ModelState.AddModelError("Name", "Спорт с такова име вече съществува.");
+            }
             if (!ModelState.IsValid)
             {
                 return this.View(model);

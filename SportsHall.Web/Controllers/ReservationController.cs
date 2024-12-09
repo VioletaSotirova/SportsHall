@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SportsHall.Services.Data;
 using SportsHall.Services.Data.Interfaces;
 using System.Security.Claims;
 
 namespace SportsHall.Web.Controllers
 {
+    [Authorize]
     public class ReservationController : Controller
     {
         private readonly IReservationService reservationService;

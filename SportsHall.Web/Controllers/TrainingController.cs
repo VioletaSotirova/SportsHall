@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using SportsHall.Data;
 using SportsHall.Data.Models;
@@ -19,7 +20,7 @@ namespace SportsHall.Web.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var userId = User.Identity.IsAuthenticated ? User.FindFirstValue(ClaimTypes.NameIdentifier) : null;
 
             IEnumerable<TrainingsViewModel> trainings =
               await this.trainingService.GetAllAsync(userId);
@@ -27,6 +28,7 @@ namespace SportsHall.Web.Controllers
             return View(trainings); 
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -35,6 +37,7 @@ namespace SportsHall.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(TrainingCreateViewModel model)
         {
@@ -49,6 +52,8 @@ namespace SportsHall.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -61,6 +66,8 @@ namespace SportsHall.Web.Controllers
                    
             return View(training);
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(TrainingCreateViewModel model, int id)
         {
@@ -73,6 +80,8 @@ namespace SportsHall.Web.Controllers
             await trainingService.UpdateAsync(model);
             return RedirectToAction(nameof(Index));
         }
+
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {

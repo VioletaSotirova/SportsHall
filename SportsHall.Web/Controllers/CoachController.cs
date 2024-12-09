@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using SportsHall.Data;
 using SportsHall.Services.Data;
 using SportsHall.Services.Data.Interfaces;
@@ -35,6 +36,7 @@ namespace SportsHall.Web.Controllers
             return View(coach);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
@@ -48,6 +50,7 @@ namespace SportsHall.Web.Controllers
             return View(coach);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(CoachEditViewModel model, int id)
         {
@@ -60,6 +63,7 @@ namespace SportsHall.Web.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> Create()
         {
@@ -67,6 +71,7 @@ namespace SportsHall.Web.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Create(CoachEditViewModel model)
         {
@@ -80,6 +85,7 @@ namespace SportsHall.Web.Controllers
             return RedirectToAction(nameof(All));
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Delete(int id)
         {
@@ -93,6 +99,5 @@ namespace SportsHall.Web.Controllers
 
             return RedirectToAction(nameof(All));
         }
-
     }
 }

@@ -34,11 +34,18 @@ namespace SportsHall.Services.Data
             {
                 var model = AutoMapperConfig.MapperInstance.Map<TrainingsViewModel>(training);
 
-                model.IsCurrentUserSigned = training.Reservations.Any(r => r.UserId == int.Parse(userId));
+                if (userId != null)
+                {
+                    model.IsCurrentUserSigned = training.Reservations.Any(r => r.UserId == int.Parse(userId));
+                }
+                else
+                {
+                    model.IsCurrentUserSigned = false; 
+                }
 
                 return model;
             }).ToList();
- 
+
             return models;
         }
         public async Task<TrainingCreateViewModel> GetCreateTrainingViewModel()

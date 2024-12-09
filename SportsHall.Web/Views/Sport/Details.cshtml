@@ -1,15 +1,23 @@
-﻿@model SportsHall.Web.ViewModels.SportDetailsViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@using SportsHall.Data.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model SportsHall.Web.ViewModels.SportDetailsViewModel
 
 <div class="card col-4 d-flex mx-auto" style="width: 600px; height:550px;">
     <img src="@Model.ImageUrl" class="card-img-top" alt="..." style="width: 600px; height:350px;">
     <div class="card-body">
         <h5 class="card-title text-center">@Model.Name</h5>
         <p class="card-text">@Model.Description</p>
-        <a asp-controller="Training" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-primary">Sign Up</a>
-        <a asp-controller="Sport" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-        <form asp-controller="Sport" asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display:inline;">
-            @Html.AntiForgeryToken()
-            <button type="submit" class="btn btn-danger">Delete</button>
-        </form>      
+            <a asp-controller="Training" asp-action="Index" asp-route-id="@Model.Id" class="btn btn-primary">Sign Up</a>
+        @if (User.IsInRole("Admin"))
+        {
+            <a asp-controller="Sport" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+            <form asp-controller="Sport" asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display:inline;">
+                @Html.AntiForgeryToken()
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        }     
     </div>
 </div>

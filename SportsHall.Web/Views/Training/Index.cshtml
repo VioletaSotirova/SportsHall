@@ -1,4 +1,9 @@
-﻿@model IEnumerable<SportsHall.Web.ViewModels.TrainingsViewModel>
+﻿@using Microsoft.AspNetCore.Identity
+@using SportsHall.Data.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model IEnumerable<SportsHall.Web.ViewModels.TrainingsViewModel>
 
 <div class="container mt-5">
     <h2 class="text-center">All Trainings</h2>
@@ -59,15 +64,18 @@
                                 <span class="text-muted">Log in to sign up</span>
                             }
                         </td>
-                        <td>
-                            <a asp-controller="Training" asp-action="Edit" asp-route-id="@training.Id" class="btn btn-primary">Edit</a>
-                        </td>
-                        <td>
-                            <form asp-controller="Training" asp-action="Delete" asp-route-id="@training.Id" method="post" style="display:inline;">
-                                @Html.AntiForgeryToken()
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <td>
+                                <a asp-controller="Training" asp-action="Edit" asp-route-id="@training.Id" class="btn btn-primary">Edit</a>
+                            </td>
+                            <td>
+                                <form asp-controller="Training" asp-action="Delete" asp-route-id="@training.Id" method="post" style="display:inline;">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        }
                     </tr>
                 }
             }

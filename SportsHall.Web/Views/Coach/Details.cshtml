@@ -1,4 +1,9 @@
-﻿@model SportsHall.Web.ViewModels.CoachDetailsViewModel
+﻿@using Microsoft.AspNetCore.Identity
+@using SportsHall.Data.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@model SportsHall.Web.ViewModels.CoachDetailsViewModel
 
 <div class="card col-8 d-flex mx-auto" style="height: auto; padding: 1rem;">
     <div class="row g-0">
@@ -13,13 +18,16 @@
                 <p class="card-text">Phone: @Model.Phone</p>
                 <p class="card-text">@Model.Expirience</p>
             </div>
-            <div class="card-footer d-flex justify-content-start">
-                <form asp-controller="Coach" asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display:inline;">
-                    @Html.AntiForgeryToken()
-                    <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-                <a asp-controller="Coach" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
-            </div>
+            @if(User.IsInRole("Admin"))
+            {
+                <div class="card-footer d-flex justify-content-start">
+                    <form asp-controller="Coach" asp-action="Delete" asp-route-id="@Model.Id" method="post" style="display:inline;">
+                        @Html.AntiForgeryToken()
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                    <a asp-controller="Coach" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Edit</a>
+                </div>
+            }
         </div>
     </div>
 </div>
