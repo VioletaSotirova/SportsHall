@@ -15,5 +15,6 @@ namespace SportsHall.Services.Data.Interfaces
         Task<Sport> CreateAsync(SportEditViewModel model);
         Task<ICollection<SelectListItem>> GetSportsAsSelectItemAsync();
         Task<int> GetSportMaxParticipantsAsync(int sportId);
+        Task<Sport> GetByNameAsync(string name);
     }
 }

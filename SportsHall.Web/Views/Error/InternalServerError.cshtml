@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "500 - Internal Server Error";
+}
+
+<h1>Something went wrong!</h1>
+<p>We are sorry, but something went wrong on our end.</p>
+@if (ViewData["ExceptionMessage"] != null)
+{
+    <details>
+        <summary>Details (for development purposes):</summary>
+        <p><strong>Message:</strong> @ViewData["ExceptionMessage"]</p>
+        <p><strong>StackTrace:</strong></p>
+        <pre>@ViewData["StackTrace"]</pre>
+    </details>
+}
+<a href="/" class="btn btn-primary">Go to Home</a>

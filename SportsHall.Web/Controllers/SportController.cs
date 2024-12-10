@@ -93,11 +93,12 @@ namespace SportsHall.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(SportEditViewModel model)
         {
-            var existingSport = await sportService.GetByIdAsync(model.Id);
+            var existingSport = await sportService.GetByNameAsync(model.Name);
             if (existingSport != null)
             {
-                ModelState.AddModelError("Name", "Спорт с такова име вече съществува.");
+                ModelState.AddModelError("Name", "Sport with this name already exsist!");
             }
+
             if (!ModelState.IsValid)
             {
                 return this.View(model);

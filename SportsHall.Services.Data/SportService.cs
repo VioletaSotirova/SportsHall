@@ -97,5 +97,11 @@ namespace SportsHall.Services.Data
             var sport = await this.sportRepository.GetByIdAsync(sportId);
             return sport?.MaxParticipants ?? 0;
         }
+
+        public async Task<Sport> GetByNameAsync(string name)
+        {
+            return await this.sportRepository.GetAllAttached()
+                .FirstOrDefaultAsync(s => s.Name == name);
+        }
     }
 }
