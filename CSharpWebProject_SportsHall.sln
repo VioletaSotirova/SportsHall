@@ -23,11 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsHall.Services.Data", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsHall.Services.Mapping", "SportsHall.Services.Mapping\SportsHall.Services.Mapping.csproj", "{C14A8674-93D2-4595-A25D-A5FEC7A4C8A7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsHall.Web.Infrastructure", "SportsHall.Web.Infrastructure\SportsHall.Web.Infrastructure.csproj", "{414BCCA5-936E-4E30-B937-ED328416D6E8}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F71E949A-C7D0-46ED-896C-8EEA7374769E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsHall.Services.Tests", "SportsHall.Services.Tests\SportsHall.Services.Tests.csproj", "{64404331-FE14-4979-AFD7-2EBC2D0066B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportsHall.Services.Tests", "SportsHall.Services.Tests\SportsHall.Services.Tests.csproj", "{64404331-FE14-4979-AFD7-2EBC2D0066B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +61,6 @@ Global
 		{C14A8674-93D2-4595-A25D-A5FEC7A4C8A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C14A8674-93D2-4595-A25D-A5FEC7A4C8A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C14A8674-93D2-4595-A25D-A5FEC7A4C8A7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{414BCCA5-936E-4E30-B937-ED328416D6E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{414BCCA5-936E-4E30-B937-ED328416D6E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{414BCCA5-936E-4E30-B937-ED328416D6E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{414BCCA5-936E-4E30-B937-ED328416D6E8}.Release|Any CPU.Build.0 = Release|Any CPU
 		{64404331-FE14-4979-AFD7-2EBC2D0066B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{64404331-FE14-4979-AFD7-2EBC2D0066B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64404331-FE14-4979-AFD7-2EBC2D0066B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -82,7 +76,6 @@ Global
 		{E5EE0593-C530-4910-BDA3-81E607D9001C} = {B979311F-7863-4BF0-B496-1EF4ED6DA599}
 		{D3F45313-BEAF-430D-BC18-B5F0E65FA312} = {2526B468-1A06-4157-A60D-8DDDE650A5F8}
 		{C14A8674-93D2-4595-A25D-A5FEC7A4C8A7} = {2526B468-1A06-4157-A60D-8DDDE650A5F8}
-		{414BCCA5-936E-4E30-B937-ED328416D6E8} = {F9E7A81C-4E79-491E-B4BE-217820B74D7A}
 		{64404331-FE14-4979-AFD7-2EBC2D0066B1} = {F71E949A-C7D0-46ED-896C-8EEA7374769E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
